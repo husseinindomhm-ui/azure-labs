@@ -1,0 +1,12 @@
+{
+  "$schema": "https://azure.com",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccountName": {
+      "value": "staz104labhussein2026"
+    },
+    "location": {
+      "value": "eastus"
+    }
+  }
+}
