@@ -1,0 +1,46 @@
+{
+  "$schema": "https://azure.com",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccountName": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 24,
+      "metadata": {
+        "description": "Provide a globally unique name for your storage account (lowercase letters and numbers only)."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "eastus",
+      "metadata": {
+        "description": "The target region where the storage account will be deployed."
+      }
+    }
+  },
+  "variables": {
+    "storageSku": "Standard_LRS"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2023-01-01",
+      "name": "[parameters('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "[variables('storageSku')]"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "supportsHttpsTrafficOnly": true,
+        "encryption": {
+          "services": {
+            "file": { "keyType": "Account", "enabled": true },
+            "blob": { "keyType": "Account", "enabled": true }
+          },
+          "keySource": "Microsoft.Storage"
+        }
+      }
+    }
+  ]
+}
